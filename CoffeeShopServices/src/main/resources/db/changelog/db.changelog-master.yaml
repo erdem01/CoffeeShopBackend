@@ -1,0 +1,104 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: coffeeshopdb-schema
+      author: erdemc
+      changes:
+        - createTable:
+            tableName: COFFEES
+            columns:
+              - column:
+                  name: COFFEE_ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    - primaryKeyName: COFFEES_pk
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR2(45)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: PRICE
+                  type: VARCHAR2(45)
+                  constraints:
+                    - nullable: false
+
+        - createTable:
+            tableName: USERS
+            columns:
+              - column:
+                  name: USER_ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    - primaryKeyName: USERS_pk
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: USER_CODE
+                  type: VARCHAR2(45)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: PASSWORD
+                  type: VARCHAR2(256)
+                  constraints:
+                    - nullable: false
+
+        - createTable:
+            tableName: ROLES
+            columns:
+              - column:
+                  name: ROLE_ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    - primaryKeyName: ROLES_pk
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: ROLE_NAME
+                  type: VARCHAR2(45)
+                  constraints:
+                    - nullable: false
+
+        - createTable:
+            tableName: USER_ROLE_REL
+            columns:
+              - column:
+                  name: USER_ROLE_REL_ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    - primaryKeyName: USER_ROLE_REL_pk
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: USER_ID
+                  type: int
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: ROLE_ID
+                  type: int
+                  constraints:
+                    - nullable: false
+
+        - loadData:
+            tableName: COFFEES
+            file:  db/changelog/coffees.csv
+
+        - loadData:
+            tableName: ROLES
+            file:  db/changelog/roles.csv
+
+        - loadData:
+            tableName: USERS
+            file:  db/changelog/users.csv
+
+        - loadData:
+            tableName: USER_ROLE_REL
+            file:  db/changelog/user_role_relation.csv
